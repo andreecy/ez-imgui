@@ -1,12 +1,10 @@
-#include "header.h"
-#include "app.h"
+#include "App/Application.h"
 
 using namespace App;
 
 int main(int, char **)
 {
     Application app;
-    app.render();
-
+    app.Run();
     return 0;
 }
