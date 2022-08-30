@@ -1,3 +1,5 @@
+#pragma once
+
 #include "imgui.h"
 #include <GLFW/glfw3.h>
 
@@ -6,10 +8,12 @@ namespace App
     class ImGuiLayer
     {
     public:
-        ImGuiLayer(GLFWwindow *glfwWindow);
+        ImGuiLayer();
         ~ImGuiLayer();
-        void Init(GLFWwindow *glfwWindow);
+        void Init();
+        void Begin();
         void Update();
+        void End();
 
     private:
         GLFWwindow *m_glfwWindow = nullptr;

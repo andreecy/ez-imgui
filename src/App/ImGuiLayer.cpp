@@ -9,6 +9,7 @@
 #endif
 #include <GLFW/glfw3.h>
 
+#include "Application.h"
 #include "ImGuiLayer.h"
 
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
@@ -20,10 +21,9 @@
 
 namespace App
 {
-    ImGuiLayer::ImGuiLayer(GLFWwindow *glfwWindow)
+    ImGuiLayer::ImGuiLayer()
     {
-        assert(glfwWindow != nullptr);
-        Init(glfwWindow);
+        Init();
     }
 
     ImGuiLayer::~ImGuiLayer()
@@ -34,7 +34,7 @@ namespace App
         ImGui::DestroyContext();
     }
 
-    void ImGuiLayer::Init(GLFWwindow *glfwWindow)
+    void ImGuiLayer::Init()
     {
 
         // Decide GL+GLSL versions
@@ -72,6 +72,7 @@ namespace App
         // Setup Dear ImGui style
         ImGui::StyleColorsDark();
 
+        auto glfwWindow = Application::Get().GetWindow().GetGlfwWindow();
         // Setup Platform/Renderer backends
         ImGui_ImplGlfw_InitForOpenGL(glfwWindow, true);
         ImGui_ImplOpenGL3_Init(glsl_version);
@@ -84,20 +85,21 @@ namespace App
         // printf("ImGuiLayer created\n");
     }
 
-    void ImGuiLayer::Update()
+    void ImGuiLayer::Begin()
     {
-        // Start the Dear ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+    }
 
-        // code goes here
-        ImGui::ShowDemoWindow();
+    void ImGuiLayer::Update()
+    {
+    }
 
-        // Rendering
+    void ImGuiLayer::End()
+    {
         ImGui::Render();
-
-        // ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
 
 }

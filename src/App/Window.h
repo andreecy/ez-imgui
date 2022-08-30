@@ -12,6 +12,10 @@ namespace App
         Window();
         ~Window();
         void Init();
+        void GetFrameBufferSize();
+        void SetViewport();
+        void SetClearColor();
+        void Clear();
         void Update();
         int ShouldClose();
         GLFWwindow *GetGlfwWindow() const

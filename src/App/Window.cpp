@@ -44,18 +44,28 @@ namespace App
         return glfwWindowShouldClose(m_glfwWindow);
     }
 
-    /// Main loop
+    void Window::GetFrameBufferSize()
+    {
+        glfwGetFramebufferSize(m_glfwWindow, &m_width, &m_height);
+    }
+
+    void Window::SetViewport()
+    {
+        glViewport(0, 0, m_width, m_height);
+    }
+
+    void Window::SetClearColor()
+    {
+        glClearColor(m_clearColor.x * m_clearColor.w, m_clearColor.y * m_clearColor.w, m_clearColor.z * m_clearColor.w, m_clearColor.w);
+    }
+
+    void Window::Clear()
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+
     void Window::Update()
     {
-        // printf("window update \n");
-
-        glfwGetFramebufferSize(m_glfwWindow, &m_width, &m_height);
-        glViewport(0, 0, m_width, m_height);
-        glClearColor(m_clearColor.x * m_clearColor.w, m_clearColor.y * m_clearColor.w, m_clearColor.z * m_clearColor.w, m_clearColor.w);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
         glfwSwapBuffers(m_glfwWindow);
         glfwPollEvents();
     }
