@@ -3,7 +3,7 @@
 
 int main(int, char **)
 {
-    // define application
+    // create application
     App::Application app;
 
     // add demo layer to app stack
